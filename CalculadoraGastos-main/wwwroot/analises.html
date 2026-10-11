@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Entenda o seu histórico financeiro e encontre conteúdos para aprender sobre planejamento e investimentos.">
+  <title>SaveMoney | Análises educativas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=4">
+</head>
+
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="index.html" aria-label="SaveMoney - início">
+        <span class="brand-mark">+</span>
+        <span>SaveMoney</span>
+      </a>
+      <p class="eyebrow sidebar-label">Seu espaço</p>
+      <nav class="main-nav" aria-label="Navegação principal">
+        <a class="nav-link" href="index.html">
+          <span class="nav-icon">⌂</span>
+          Início
+        </a>
+        <a class="nav-link" href="controle.html">
+          <span class="nav-icon">▦</span>
+          Meu controle
+        </a>
+        <a class="nav-link active" href="analises.html" aria-current="page">
+          <span class="nav-icon">◔</span>
+          Análises
+        </a>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <a class="mobile-brand" href="index.html">
+          <span class="brand-mark">+</span>
+          SaveMoney
+        </a>
+        <div class="period-selector">
+          <span class="status-dot"></span>
+          <label class="analysis-period-label" for="analysis-period">Período</label>
+          <input id="analysis-period" type="month">
+        </div>
+      </header>
+
+      <div class="content-wrap">
+        <section class="analysis-welcome">
+          <p class="eyebrow">ANÁLISES · EDUCAÇÃO FINANCEIRA</p>
+          <h1>Mais clareza para <em>escolher seus próximos passos.</em></h1>
+          <p>
+            Uma leitura educativa dos lançamentos registrados, acompanhada de
+            ideias práticas e fontes confiáveis para você continuar aprendendo.
+          </p>
+          <a class="analysis-back-link" href="controle.html">← Voltar ao meu controle</a>
+        </section>
+
+        <section class="summary-grid analysis-summary" aria-label="Resumo dos lançamentos registrados">
+          <article class="summary-card light-card">
+            <div class="card-heading">
+              <span>Entradas do período</span>
+              <span class="summary-icon income">↗</span>
+            </div>
+            <strong id="analysis-income">—</strong>
+            <small id="analysis-entry-count">0 lançamentos no período</small>
+          </article>
+          <article class="summary-card light-card">
+            <div class="card-heading">
+              <span>Saídas do período</span>
+              <span class="summary-icon expense">↘</span>
+            </div>
+            <strong id="analysis-expense">—</strong>
+            <small id="analysis-expense-count">0 lançamentos no período</small>
+          </article>
+          <article class="summary-card balance-card analysis-balance-card">
+            <div class="card-heading">
+              <span>Resultado do período</span>
+              <span class="card-kicker" id="analysis-period-label"></span>
+            </div>
+            <strong class="balance-value" id="analysis-balance">—</strong>
+            <div class="balance-foot">Confira as observações antes de interpretar este total.</div>
+          </article>
+        </section>
+
+        <section class="analysis-notice" aria-label="Como interpretar esta análise">
+          <span aria-hidden="true">i</span>
+          <p>
+            A análise considera somente lançamentos com data dentro do período selecionado.
+            Registros antigos sem data não entram nos totais. Você pode definir a data
+            deles no controle para incluí-los no mês correto.
+          </p>
+        </section>
+
+        <section class="analysis-status" id="analysis-status" data-tone="neutral" aria-live="polite">
+          <div class="analysis-status-copy">
+            <p class="eyebrow" id="analysis-status-label">SUA LEITURA</p>
+            <h2 id="analysis-status-title">Carregando seu histórico...</h2>
+            <p id="analysis-status-copy">Estamos organizando os lançamentos registrados.</p>
+          </div>
+          <div class="analysis-status-mark" aria-hidden="true"><span>✳</span></div>
+        </section>
+
+        <div class="analysis-layout">
+          <section class="panel analysis-tips-panel" aria-labelledby="analysis-tips-title">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">PRÓXIMOS PASSOS</p>
+                <h2 id="analysis-tips-title">Ideias para o seu momento</h2>
+              </div>
+            </div>
+            <p class="analysis-tips-intro" id="analysis-tips-intro">
+              As dicas aparecerão aqui depois que seus dados forem carregados.
+            </p>
+            <div class="analysis-tips-list" id="analysis-tips-list"></div>
+          </section>
+
+          <section class="panel analysis-categories-panel" aria-labelledby="analysis-categories-title">
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">VISÃO DOS GASTOS</p>
+                <h2 id="analysis-categories-title">Categorias registradas</h2>
+              </div>
+            </div>
+            <div id="analysis-categories" class="analysis-categories" aria-live="polite">
+              <p class="analysis-muted">Carregando categorias...</p>
+            </div>
+            <p class="analysis-category-note" id="analysis-category-note"></p>
+            <a class="analysis-detail-link" href="controle.html#lancamentos">Definir datas no meu controle <span>→</span></a>
+          </section>
+        </div>
+
+        <p class="analysis-undated-note" id="analysis-undated-note" aria-live="polite"></p>
+
+        <section class="analysis-resources" aria-labelledby="analysis-resources-title">
+          <div class="analysis-resources-heading">
+            <div>
+              <p class="eyebrow">CONTINUE APRENDENDO</p>
+              <h2 id="analysis-resources-title">Conteúdo confiável, no seu ritmo.</h2>
+            </div>
+            <p>Materiais educativos de instituições oficiais — não são recomendações de produtos.</p>
+          </div>
+          <div class="analysis-resource-grid">
+            <a class="analysis-resource-card" href="https://www.bcb.gov.br/cidadaniafinanceira" target="_blank" rel="noopener noreferrer">
+              <span class="analysis-resource-tag">BANCO CENTRAL</span>
+              <strong>Organização financeira e cidadania</strong>
+              <span>Conheça materiais do Banco Central para planejar e cuidar melhor das finanças. <span aria-hidden="true">↗</span></span>
+            </a>
+            <a class="analysis-resource-card" href="https://www.gov.br/investidor/pt-br/educacional" target="_blank" rel="noopener noreferrer">
+              <span class="analysis-resource-tag">PORTAL DO INVESTIDOR · CVM</span>
+              <strong>Aprenda antes de investir</strong>
+              <span>Explore conteúdos educacionais sobre investimentos, riscos e decisões conscientes. <span aria-hidden="true">↗</span></span>
+            </a>
+            <a class="analysis-resource-card" href="https://www.tesourodireto.com.br/" target="_blank" rel="noopener noreferrer">
+              <span class="analysis-resource-tag">TESOURO DIRETO</span>
+              <strong>Entenda títulos públicos</strong>
+              <span>Consulte informações sobre objetivos e características do Tesouro Direto. <span aria-hidden="true">↗</span></span>
+            </a>
+          </div>
+        </section>
+
+        <p class="analysis-disclaimer">
+          O SaveMoney oferece conteúdo educativo, não aconselhamento financeiro individual.
+          Antes de tomar decisões, considere seus objetivos, prazos, necessidades e tolerância a riscos.
+        </p>
+
+        <footer class="footer-note">
+          <span>SaveMoney</span>
+          <span>Educação financeira para escolhas reais.</span>
+          <a href="controle.html">Voltar ao meu controle →</a>
+        </footer>
+
+        <section class="analysis-error" id="analysis-error" role="alert" hidden>
+          <strong>Não foi possível carregar as análises.</strong>
+          <span id="analysis-error-message"></span>
+          <button class="primary-button" id="analysis-retry" type="button">Tentar novamente</button>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="analises.js?v=2"></script>
+</body>
+
+</html>

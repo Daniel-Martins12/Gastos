@@ -1,0 +1,724 @@
+```html
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Acompanhe suas entradas, gastos e saldo com o controle financeiro pessoal SaveMoney.">
+  <title>SaveMoney | Meu controle financeiro</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css?v=5">
+</head>
+
+<body>
+
+  <div class="app-shell">
+
+    <!-- ==================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside class="sidebar">
+
+      <a class="brand" href="index.html" aria-label="SaveMoney - início">
+        <span class="brand-mark">+</span>
+        <span>SaveMoney</span>
+      </a>
+
+      <p class="eyebrow sidebar-label">
+        Seu espaço
+      </p>
+
+      <nav class="main-nav" aria-label="Navegação principal">
+
+        <a class="nav-link" href="index.html">
+          <span class="nav-icon">⌂</span>
+          Início
+        </a>
+
+        <a class="nav-link active" href="controle.html">
+          <span class="nav-icon">▦</span>
+          Meu controle
+        </a>
+
+        <a class="nav-link" href="#lancamentos">
+          <span class="nav-icon">↕</span>
+          Lançamentos
+        </a>
+
+        <a class="nav-link" href="analises.html">
+          <span class="nav-icon">◔</span>
+          Análises
+        </a>
+
+      </nav>
+
+    </aside>
+
+
+    <!-- ==================================================
+         CONTEÚDO PRINCIPAL
+    ================================================== -->
+
+    <main class="main-content">
+
+      <!-- TOPBAR -->
+
+      <header class="topbar">
+
+        <div class="mobile-brand">
+          <span class="brand-mark">+</span>
+          SaveMoney
+        </div>
+
+        <div class="period-selector">
+
+          <span class="status-dot"></span>
+
+          <span>Visão de</span>
+
+          <strong>
+            <span id="current-period"></span>
+          </strong>
+
+          <span class="chevron">
+            ⌄
+          </span>
+
+        </div>
+
+      </header>
+
+
+      <div class="content-wrap">
+
+        <!-- ==================================================
+             BOAS-VINDAS
+        ================================================== -->
+
+        <section class="welcome-row" id="inicio">
+
+          <div>
+
+            <p class="eyebrow" id="current-date"></p>
+
+            <h1>
+              Seu dinheiro,<br>
+              <em>mais claro.</em>
+            </h1>
+
+          </div>
+
+          <button
+            class="primary-button"
+            type="button"
+            data-scroll-form
+          >
+            <span>+</span>
+            Novo lançamento
+          </button>
+
+        </section>
+
+
+        <!-- ==================================================
+             RESUMO FINANCEIRO
+        ================================================== -->
+
+        <section
+          class="summary-grid"
+          aria-label="Resumo financeiro"
+        >
+
+          <!-- SALDO -->
+
+          <article class="balance-card summary-card">
+
+            <div class="card-heading">
+
+              <span>
+                Resultado do mês
+              </span>
+
+              <span class="card-kicker">
+                ● EM DIA
+              </span>
+
+            </div>
+
+            <strong
+              class="balance-value"
+              id="balance-value"
+            >
+              R$ 0,00
+            </strong>
+
+            <div class="balance-foot">
+
+              <span id="balance-message">
+                Calculando seu mês...
+              </span>
+
+              <span
+                class="trend-pill"
+                id="balance-trend"
+              >
+                —
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <!-- ENTRADAS -->
+
+          <article class="summary-card light-card">
+
+            <div class="card-heading">
+
+              <span>
+                Total de entradas
+              </span>
+
+              <span class="summary-icon income">
+                ↗
+              </span>
+
+            </div>
+
+            <strong id="income-value">
+              R$ 0,00
+            </strong>
+
+            <small>
+              <span class="positive">●</span>
+              Receitas no período
+            </small>
+
+          </article>
+
+
+          <!-- SAÍDAS -->
+
+          <article class="summary-card light-card">
+
+            <div class="card-heading">
+
+              <span>
+                Total de saídas
+              </span>
+
+              <span class="summary-icon expense">
+                ↘
+              </span>
+
+            </div>
+
+            <strong id="expense-value">
+              R$ 0,00
+            </strong>
+
+            <small>
+              <span class="negative">●</span>
+              Despesas no período
+            </small>
+
+          </article>
+
+        </section>
+
+        <p class="period-data-note" id="period-data-note" aria-live="polite"></p>
+
+
+        <!-- ==================================================
+             LANÇAMENTOS + CATEGORIAS
+        ================================================== -->
+
+        <div class="dashboard-grid">
+
+
+          <!-- ==================================================
+               LANÇAMENTOS
+          ================================================== -->
+
+          <section
+            class="panel transactions-panel"
+            id="lancamentos"
+          >
+
+            <div class="panel-header">
+
+              <div>
+
+                <p class="eyebrow">
+                  MOVIMENTAÇÕES
+                </p>
+
+                <h2>
+                  Seus lançamentos
+                </h2>
+
+              </div>
+
+              <button
+                class="text-button"
+                type="button"
+                data-scroll-form
+              >
+                Novo lançamento
+                <span>→</span>
+              </button>
+
+            </div>
+
+
+            <!-- COLUNAS -->
+
+            <div class="transactions-columns">
+
+
+              <!-- ==================================================
+                   ENTRADAS
+              ================================================== -->
+
+              <div class="transaction-group">
+
+                <div class="transaction-group-header income-header">
+
+                  <div>
+
+                    <span class="summary-icon income">
+                      ↗
+                    </span>
+
+                    <div>
+
+                      <strong>
+                        Entradas
+                      </strong>
+
+                      <small>
+                        Dinheiro que entrou
+                      </small>
+
+                    </div>
+
+                  </div>
+
+                  <strong id="entries-total">
+                    R$ 0,00
+                  </strong>
+
+                </div>
+
+
+                <div
+                  class="transaction-list"
+                  id="entry-list"
+                ></div>
+
+
+                <div
+                  class="empty-state"
+                  id="empty-entry-state"
+                  hidden
+                >
+
+                  <span>
+                    ○
+                  </span>
+
+                  <strong>
+                    Nenhuma entrada
+                  </strong>
+
+                  <p>
+                    Adicione um salário ou outra receita.
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              <!-- ==================================================
+                   GASTOS
+              ================================================== -->
+
+              <div class="transaction-group">
+
+                <div class="transaction-group-header expense-header">
+
+                  <div>
+
+                    <span class="summary-icon expense">
+                      ↘
+                    </span>
+
+                    <div>
+
+                      <strong>
+                        Gastos
+                      </strong>
+
+                      <small>
+                        Dinheiro que saiu
+                      </small>
+
+                    </div>
+
+                  </div>
+
+                  <strong id="expenses-total">
+                    R$ 0,00
+                  </strong>
+
+                </div>
+
+
+                <div
+                  class="transaction-list"
+                  id="expense-list"
+                ></div>
+
+
+                <div
+                  class="empty-state"
+                  id="empty-expense-state"
+                  hidden
+                >
+
+                  <span>
+                    ○
+                  </span>
+
+                  <strong>
+                    Nenhum gasto
+                  </strong>
+
+                  <p>
+                    Adicione uma despesa para acompanhar.
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- ==================================================
+               ANÁLISE POR CATEGORIA
+          ================================================== -->
+
+          <section
+            class="panel category-panel"
+            id="analise"
+          >
+
+            <div class="panel-header">
+
+              <div>
+
+                <p class="eyebrow">
+                  ONDE VAI SEU DINHEIRO
+                </p>
+
+                <h2>
+                  Por categoria
+                </h2>
+
+              </div>
+
+              <span class="period-label">
+                Este mês
+              </span>
+
+            </div>
+
+
+            <div
+              class="category-chart"
+              id="category-chart"
+            ></div>
+
+
+            <div class="chart-caption">
+
+              <span class="legend-dot"></span>
+
+              <span>
+                Despesas agrupadas
+              </span>
+
+              <strong id="category-total">
+                R$ 0,00
+              </strong>
+
+            </div>
+
+          </section>
+
+        </div>
+
+
+        <!-- ==================================================
+             DIAGNÓSTICO
+        ================================================== -->
+
+        <section class="insight-section">
+
+          <div class="insight-copy">
+
+            <p class="eyebrow">
+              DIAGNÓSTICO EDUCACIONAL
+            </p>
+
+            <h2 id="diagnosis-title">
+              Vamos entender seu momento.
+            </h2>
+
+            <p id="diagnosis-copy">
+              Registre seus movimentos para receber
+              uma leitura simples e prática da sua
+              saúde financeira.
+            </p>
+
+            <a class="outline-button" href="analises.html">
+              Ver análise e dicas
+              <span>→</span>
+            </a>
+
+          </div>
+
+
+          <div
+            class="insight-graphic"
+            aria-hidden="true"
+          >
+
+            <div class="sun"></div>
+
+            <div class="graphic-line line-one"></div>
+
+            <div class="graphic-line line-two"></div>
+
+            <div class="graphic-dot dot-one"></div>
+
+            <div class="graphic-dot dot-two"></div>
+
+            <div class="graphic-dot dot-three"></div>
+
+          </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             NOVO LANÇAMENTO
+        ================================================== -->
+
+        <section
+          class="add-section"
+          id="novo-lancamento"
+        >
+
+          <div class="form-intro">
+
+            <p class="eyebrow">
+              CONTROLE NA PRÁTICA
+            </p>
+
+            <h2>
+              Registrar lançamento
+            </h2>
+
+            <p>
+              Uma pequena anotação hoje deixa
+              as decisões de amanhã mais leves.
+            </p>
+
+          </div>
+
+
+          <form
+            class="entry-form"
+            id="entry-form"
+          >
+
+            <label>
+
+              Descrição
+
+              <input
+                name="description"
+                type="text"
+                placeholder="Ex: Mercado"
+                required
+                maxlength="60"
+              >
+
+            </label>
+
+            <label>
+
+              Data
+
+              <input
+                name="date"
+                type="date"
+                required
+              >
+
+            </label>
+
+            <label>
+
+              Valor
+
+              <input
+                name="value"
+                type="number"
+                placeholder="0,00"
+                min="0.01"
+                step="0.01"
+                required
+              >
+
+            </label>
+
+
+            <label>
+
+              Tipo
+
+              <select name="type">
+
+                <option value="0">
+                  Entrada
+                </option>
+
+                <option value="1">
+                  Saída
+                </option>
+
+              </select>
+
+            </label>
+
+
+            <label>
+
+              Categoria
+
+              <select name="category">
+
+                <option>
+                  Moradia
+                </option>
+
+                <option>
+                  Alimentação
+                </option>
+
+                <option>
+                  Lazer
+                </option>
+
+                <option>
+                  Transporte
+                </option>
+
+                <option>
+                  Saúde
+                </option>
+
+                <option>
+                  Educação
+                </option>
+
+                <option>
+                  Outros
+                </option>
+
+                <option>
+                  Renda
+                </option>
+
+              </select>
+
+            </label>
+
+
+            <button
+              class="primary-button form-submit"
+              type="submit"
+            >
+              Adicionar
+              <span>↗</span>
+            </button>
+
+          </form>
+
+        </section>
+
+
+        <!-- ==================================================
+             RODAPÉ
+        ================================================== -->
+
+        <footer class="footer-note">
+
+          <span>
+            SaveMoney
+          </span>
+
+          <span>
+            Educação financeira para escolhas reais.
+          </span>
+
+          <button
+            type="button"
+            id="reset-data"
+          >
+            Restaurar cenário de teste
+          </button>
+
+        </footer>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- ==================================================
+       TOAST
+  ================================================== -->
+
+  <div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+
+  <script src="script.js?v=9"></script>
+
+</body>
+
+</html>
+```
